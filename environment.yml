@@ -1,4 +1,8 @@
+channels:
+- conda-forge
+- defaults
 dependencies:
 - matplotlib
 - numpy
 - numba
+- ffmpeg
