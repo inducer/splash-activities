@@ -7,3 +7,4 @@ dependencies:
 - numba
 - ffmpeg
 - ipywidgets
+- imageio
