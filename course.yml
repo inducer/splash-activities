@@ -1,0 +1,16 @@
+chunks:
+
+-
+    title: "Welcome to the Camp Activity"
+    id: welcome
+
+    content: |
+
+        # Welcome to your 'Waves' Camp Actvity!
+
+        Please click below to start the activity:
+
+        <a href="flow:camp-activity" role="button" class="btn btn-default">Begin Activity &raquo;</a>.
+
+        The source code for this activity can be found in [this
+        repository](https://github.com/inducer/splash-activities).

@@ -1,0 +1,45 @@
+{% from "yaml-macros.yml" import indented_include %}
+
+title: "Waves Camp Activity"
+
+description: |
+
+    Welcome!
+
+pages:
+
+-
+    id: welcome
+    type: Page
+    content: |
+
+        # Welcome
+
+        Welcome to the your camp activity to learn about waves!
+
+-
+    id: notebook_embed
+    type: Page
+    content: |
+
+        # Embedding a Notebook
+
+        <iframe id="binder_frame_1"
+            title="Binder Notebook"
+            width="800"
+            height="800"
+            src="https://mybinder.org/v2/gh/inducer/splash-activities/master?filepath=Video%20comparison.ipynb">
+        </iframe>
+
+-
+    {{ indented_include("questions/autograded-python-example.yml", 4) }}
+
+completion_text: |
+
+    # Nice to see you!
+
+    Thank you for participating in this camp activity.
+
+    Please continue to our survey:
+
+    <a href="flow:survey" role="button" class="btn btn-default">Start Survey &raquo;</a>.
