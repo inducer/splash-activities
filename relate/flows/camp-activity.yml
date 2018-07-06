@@ -11,6 +11,31 @@ description: |
         Please click "Start" below to begin.
     </div>
 
+rules:
+
+    start:
+    -
+        may_start_new_session: True
+        may_list_existing_sessions: True
+
+    access:
+    -
+        if_in_progress: True
+        if_has_role: [student, ta, instructor, unenrolled]
+        permissions: [view, submit_answer, end_session, see_correctness]
+
+    -
+        if_in_progress: False
+        if_has_role: [student, ta, instructor]
+        permissions: [view, see_correctness, see_answer_after_submission]
+
+    grade_identifier: null
+
+    grading:
+    -
+        generates_grade: false
+
+completion_text: |
 pages:
 
 -
@@ -31,8 +56,8 @@ pages:
 
         <iframe id="binder_frame_1"
             title="Binder Notebook"
-            width="940"
-            height="800"
+            width="1140"
+            height="1000"
             src="https://mybinder.org/v2/gh/inducer/splash-activities/master?filepath=Video%20comparison.ipynb">
         </iframe>
 

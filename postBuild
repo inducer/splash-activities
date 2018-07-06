@@ -2,7 +2,7 @@
 
 # https://mybinder.readthedocs.io/en/latest/using.html#postbuild
 
-jupyter contrib nbextension install --user
+jupyter nbextension install --user
 jupyter nbextension enable --py widgetsnbextension
 
 cat > ~/.jupyter/jupyter_notebook_config.py <<EOF
@@ -11,6 +11,4 @@ c.NotebookApp.tornado_settings = {
         'Content-Security-Policy': "frame-ancestors https://relate.cs.illinois.edu 'self' "
     }
 }
-# c.NotebookApp.token = ''
-# c.NotebookApp.password = ''
 EOF
