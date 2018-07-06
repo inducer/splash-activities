@@ -10,7 +10,9 @@ chunks:
 
         Please click below to start the activity:
 
-        <a href="flow:camp-activity" role="button" class="btn btn-default">Begin Activity &raquo;</a>.
+        <div style="margin-top: 2ex; margin-bottom: 2ex;">
+            <a href="flow:camp-activity" role="button" class="btn btn-primary">Begin Activity &raquo;</a>
+        </div>
 
         The source code for this activity can be found in [this
         repository](https://github.com/inducer/splash-activities).

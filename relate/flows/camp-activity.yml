@@ -4,7 +4,12 @@ title: "Waves Camp Activity"
 
 description: |
 
-    Welcome!
+    # Welcome!
+
+    <div style="margin-bottom: 2ex;">
+        This is the activity start page.
+        Please click "Start" below to begin.
+    </div>
 
 pages:
 
@@ -26,7 +31,7 @@ pages:
 
         <iframe id="binder_frame_1"
             title="Binder Notebook"
-            width="800"
+            width="940"
             height="800"
             src="https://mybinder.org/v2/gh/inducer/splash-activities/master?filepath=Video%20comparison.ipynb">
         </iframe>

@@ -11,6 +11,6 @@ c.NotebookApp.tornado_settings = {
         'Content-Security-Policy': "frame-ancestors https://relate.cs.illinois.edu 'self' "
     }
 }
-c.NotebookApp.token = ''
-c.NotebookApp.password = ''
+# c.NotebookApp.token = ''
+# c.NotebookApp.password = ''
 EOF
