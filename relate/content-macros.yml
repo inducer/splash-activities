@@ -1,0 +1,20 @@
+{% macro binder_notebook(iframe_id, filepath) -%}
+  </iframe>
+    <iframe id="{{ iframe_id }}"
+        title="Binder Notebook"
+        width="1140"
+        height="1000"
+        frameborder=0
+        src="https://mybinder.org/v2/gh/inducer/splash-activities/master?filepath={{ filepath }}">
+    </iframe>
+
+  <div class="alert alert-info" markdown="1">
+    To use this embedded notebook, please make sure your browser allows
+    so-called **Third-Party Cookies**. Usually, they're a bad idea,
+    but unfortunately we have to require that you allow them.
+
+    You can change this in your browser settings. Just make sure
+    to change it back to the way it was after you are done.
+  </div>
+{%- endmacro %}
+

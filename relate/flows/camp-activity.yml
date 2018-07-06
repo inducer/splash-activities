@@ -54,12 +54,8 @@ pages:
 
         # Embedding a Notebook
 
-        <iframe id="binder_frame_1"
-            title="Binder Notebook"
-            width="1140"
-            height="1000"
-            src="https://mybinder.org/v2/gh/inducer/splash-activities/master?filepath=Video%20comparison.ipynb">
-        </iframe>
+        {% from "content-macros.jinja" import binder_notebook %}
+        {{ binder_notebook("binder_1", "Video%20comparison.ipynb") }}
 
 -
     {{ indented_include("questions/autograded-python-example.yml", 4) }}
