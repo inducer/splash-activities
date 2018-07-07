@@ -1,25 +1,83 @@
-type: ChoiceQuestion
+type: PythonCodeQuestion
 id: slope_of_bendy_curve_3
-shuffle: True
-title: Slope of a bendy curve
+access_rules:
+    add_permissions:
+        - change_answer
+value: 1
+timeout: 10
+
+
 prompt: |
     # Slope of a bendy curve - III
-
     We have a bendy curve, will the slope of such a curve be same as what we
     observed in the previous assignment. Calculate the slope using the given
     points.
 
-    ![image](repo:images/ass_2_q3.png)
 
-choices: 
 
-    - ~CORRECT~ 3.25
-    - 2.75
-    - 1.75
-    - 2.25
-    - 63
+setup_code: |
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from matplotlib.ticker import MultipleLocator
 
-answer_explanation: |
+    x = np.linspace(0, 33)
+    y = 0.0625*x**2 + 1
 
-    $\bigtriangleup x = 26$
-    $\bigtriangleup y = 8$
+    fig, ax = plt.subplots()
+    ax.plot(x, y)
+
+    ax.xaxis.set_major_locator(MultipleLocator(2))
+    ax.yaxis.set_major_locator(MultipleLocator(2))
+
+    plt.grid(b=True, which='major', color='k', linestyle='-', lw=0.2)
+    plt.grid(b=True, which='minor', color='k', linestyle='--', lw=0.2)
+
+    # plotting the line
+    plt.plot(x, y, color='r')
+
+    # setting the x1, x2
+    x1, y1 = 24, 0.0625*24**2+1
+    x2, y2 = 32, 0.0625*32**2+1
+
+    # plotting the line parallel to x-axis
+    plt.plot(np.linspace(x1, x2, 100), y1*np.ones(100))
+    # plotting the line parallel to y-axis
+    plt.plot(x2*np.ones(100), np.linspace(y1, y2, 100))
+
+    # highlighting the points of intersection
+    plt.scatter([x1, x2], [y1, y2])
+
+
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.axis('equal')
+    plt.title('Slope of a bendy curve.')
+    plt.show()
+
+
+names_from_user: [slope]
+
+
+
+test_code: |
+
+    if not isinstance(slope, float):
+        feedback.finish(0, "Your computed slope is not a decimal.")
+    correct_slope = 3.25
+    rel_err = abs(correct_slope-slope)/abs(correct_slope)
+    if rel_err < 0.1:
+        feedback.finish(1, "Your computed slope was correct. Well done!")
+    else:
+        feedback.finish(0, "Your computed slope was incorrect.")
+
+
+
+correct_code: |
+    slope = 3.25
+
+
+
+initial_code: |
+    # Enter your slope value here.
+    slope = ...
+

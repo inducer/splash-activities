@@ -6,10 +6,6 @@ access_rules:
 value: 1
 timeout: 10
 
-
-
-
-
 prompt: |
     # Introduction to the slope of a line - I
 
@@ -19,14 +15,6 @@ prompt: |
     y}{\bigtriangleup x}$.
 
     To check your answer enter the slope in the box as `slope=1`(if the slope is 1)
-
-
-
-
-
-
-
-
 
 setup_code: |
     import numpy as np
@@ -65,15 +53,7 @@ setup_code: |
     plt.title('A line with slope ???')
     plt.show()
 
-
-
-
-
 names_from_user: [slope]
-
-
-
-
 
 test_code: |
 
@@ -86,25 +66,9 @@ test_code: |
     else:
         feedback.finish(0, "Your computed slope was incorrect.")
 
-
-
-
-
-
-
-
-
 correct_code: |
     slope = 3.00
-
-
-
-
-
-
-
 
 initial_code: |
     # Enter your slope value here.
     slope = ...
-

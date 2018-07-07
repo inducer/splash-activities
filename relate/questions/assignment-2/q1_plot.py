@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.ticker import MultipleLocator
-plt.rcParams["font.family"] = "Times New Roman"
+from matplotlib.ticker import MultipleLocato
 
 x = np.linspace(0, 33)
 y = 0.0625*x**2 + 1  # choosing '3' as the slope
@@ -31,7 +30,6 @@ plt.plot(x2*np.ones(100), np.linspace(y1, y2, 100))
 plt.scatter([x1, x2], [y1, y2])
 
 
-plt.legend()
 plt.xlabel('X')
 plt.ylabel('Y')
 plt.axis('equal')
