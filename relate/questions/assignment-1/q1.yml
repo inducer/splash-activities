@@ -3,11 +3,14 @@ id: explain_slope
 shuffle: True
 title: Introduction to slope
 prompt: |
+    # Introduction to the slope of a line - I
+
     Using the graph paper sketches below calculate the slope. The length of the
     orange line represents $\bigtriangleup x$ and the length of the green line
-    represents $\bigtriangleup y$. Slope is given by \frac{$\bigtriangleup
-    y$}{\bigtrianlgeup x}. 
-    ![image](repo:images/ass_1_q1.png)
+    represents $\bigtriangleup y$. Slope is given by $\frac{$\bigtriangleup
+    y$}{\bigtrianlgeup x}$.
+
+    ![image](repo:relate/images/ass_1_q1.png)
 
 choices: 
 

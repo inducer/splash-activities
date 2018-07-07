@@ -3,9 +3,11 @@ id: a_tale_of_two_slopes
 shuffle: True
 title: Introduction to slope
 prompt: |
-    Calculate the slopes of the 2 different sections of a line shown below.
+    # Introduction to the slope of a line - III
 
-    ![image](repo:images/ass_1_q3.png)
+    Calculate the slopes of two different sections of a line shown below.
+
+    ![image](repo:relate/images/ass_1_q3.png)
 
 choices: 
 
