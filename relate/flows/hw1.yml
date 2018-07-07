@@ -1,5 +1,4 @@
-{% from "yaml-macros.jinja" import hw_header, hw_header_preview, indented_include %}
-{{ hw_header(1) }}
+{% from "yaml-macros.yml" import indented_include %}
 
 pages:
 
