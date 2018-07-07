@@ -50,7 +50,7 @@ pages:
     {{ indented_include("questions/assignment-1/q1.yml", 4) }}
 
 -
-    {{ indented_include("questions/assignment-1/q3.yml", 4) }}
+    {{ indented_include("questions/assignment-1/q2.yml", 4) }}
 
 -
     {{ indented_include("questions/assignment-1/q3.yml", 4) }}
