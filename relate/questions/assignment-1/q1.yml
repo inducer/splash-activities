@@ -7,7 +7,7 @@ prompt: |
 
     Using the graph paper sketches below calculate the slope. The length of the
     orange line represents $\bigtriangleup x$ and the length of the green line
-    represents $\bigtriangleup y$. Slope is given by $\frac{$\bigtriangleup
+    represents $\bigtriangleup y$. Slope is given by $\frac{\bigtriangleup
     y}{\bigtriangleup x}$.
 
     ![image](repo:relate/images/ass_1_q1.png)
