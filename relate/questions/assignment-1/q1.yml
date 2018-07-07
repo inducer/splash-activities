@@ -1,7 +1,15 @@
-type: ChoiceQuestion
+type: PythonCodeQuestion
 id: explain_slope
-shuffle: True
-title: Introduction to slope
+access_rules:
+    add_permissions:
+        - change_answer
+value: 1
+timeout: 10
+
+
+
+
+
 prompt: |
     # Introduction to the slope of a line - I
 
@@ -10,16 +18,93 @@ prompt: |
     represents $\bigtriangleup y$. Slope is given by $\frac{\bigtriangleup
     y}{\bigtriangleup x}$.
 
-    $ $ ![image](repo:images/ass_1_q1.png)
+    To check your answer enter the slope in the box as `slope=1`(if the slope is 1)
 
-choices: 
 
-    - 1
-    - ~CORRECT~ 3
-    - 4
-    - 5
-    - 6
 
-answer_explanation: |
-    $\bigtriangleup x = 4$
-    $\bigtriangleup y = 12$
+
+
+
+
+
+
+setup_code: |
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from matplotlib.ticker import MultipleLocator
+
+    x = np.linspace(0, 10)
+    y = 3*x  # choosing '3' as the slope
+
+    fig, ax = plt.subplots()
+    ax.plot(x, y)
+
+    ax.xaxis.set_major_locator(MultipleLocator(2))
+    ax.xaxis.set_minor_locator(MultipleLocator(1))
+    ax.yaxis.set_major_locator(MultipleLocator(2))
+    ax.yaxis.set_minor_locator(MultipleLocator(1))
+
+    plt.grid(b=True, which='major', color='k', linestyle='-', lw=0.2)
+    plt.grid(b=True, which='minor', color='k', linestyle='--', lw=0.2)
+
+    # plotting the line
+    plt.plot(x, y, color='r')
+
+    # plotting the line parallel to x-axis
+    plt.plot(np.linspace(2, 6, 100), 6*np.ones(100))
+    # plotting the line parallel to y-axis
+    plt.plot(6*np.ones(100), np.linspace(6, 18, 100))
+
+    # highlighting the points of intersection
+    plt.scatter([2, 6], [6, 18])
+
+
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.axis('equal')
+    plt.title('A line with slope ???')
+    plt.show()
+
+
+
+
+
+names_from_user: [slope]
+
+
+
+
+
+test_code: |
+
+    if not isinstance(slope, float):
+        feedback.finish(0, "Your computed slope is not a decimal.")
+    correct_slope = 3.00
+    rel_err = abs(correct_slope-slope)/abs(correct_slope)
+    if rel_err < 0.1:
+        feedback.finish(1, "Your computed slope was correct. Well done!")
+    else:
+        feedback.finish(0, "Your computed slope was incorrect.")
+
+
+
+
+
+
+
+
+
+correct_code: |
+    slope = 3.00
+
+
+
+
+
+
+
+
+initial_code: |
+    # Enter your slope value here.
+    slope = ...
+
