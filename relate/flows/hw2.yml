@@ -1,0 +1,13 @@
+{% from "yaml-macros.jinja" import hw_header, hw_header_preview, indented_include %}
+{{ hw_header(1) }}
+
+pages:
+
+-
+    {{ indented_include("questions/assignment-2/q1.yml", 4) }}
+
+-
+    {{ indented_include("questions/assignment-2/q3.yml", 4) }}
+
+-
+    {{ indented_include("questions/assignment-2/q3.yml", 4) }}
