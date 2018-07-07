@@ -1,18 +1,85 @@
-type: ChoiceQuestion
+type: PythonCodeQuestion
 id: a_tale_of_two_slopes
-shuffle: True
-title: Introduction to slope
+access_rules:
+    add_permissions:
+        - change_answer
+value: 1
+timeout: 10
+
+
 prompt: |
-    # Introduction to the slope of a line - III
+    # Slope of a bendy curve - III
 
-    Calculate the slopes of two different sections of a line shown below.
+    We have a bendy curve, will the slope of such a curve be same as what we
+    observed in the previous assignment. Calculate the slope using the given
+    points.
 
-    ![image](repo:images/ass_1_q3.png)
 
-choices: 
+setup_code: |
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from matplotlib.ticker import MultipleLocator
 
-    - ~CORRECT~ 0.5, 0.5
-    - 0.5, 2.0
-    - 2.0, 0.5
-    - 1.0, 0.5
-    - 0.5, 1.0
+    x = np.linspace(0, 10)
+    y = 0.5*x  # choosing '0.5' as the slope
+
+    fig, ax = plt.subplots()
+    ax.plot(x, y)
+
+    ax.xaxis.set_major_locator(MultipleLocator(2))
+    ax.xaxis.set_minor_locator(MultipleLocator(1))
+    ax.yaxis.set_major_locator(MultipleLocator(2))
+    ax.yaxis.set_minor_locator(MultipleLocator(1))
+
+    plt.grid(b=True, which='major', color='k', linestyle='-', lw=0.2)
+    plt.grid(b=True, which='minor', color='k', linestyle='--', lw=0.2)
+
+    # plotting the line
+    plt.plot(x, y, color='r')
+
+    # plotting the line parallel to x-axis
+    plt.plot(np.linspace(2, 4, 100), 1*np.ones(100))
+    plt.plot(np.linspace(6, 8, 100), 3*np.ones(100))
+    # plotting the line parallel to y-axis
+    plt.plot(4*np.ones(100), np.linspace(1, 2, 100))
+    plt.plot(8*np.ones(100), np.linspace(3, 4, 100))
+
+    # highlighting the points of intersection
+    plt.scatter([2, 4], [1, 2])
+    plt.scatter([6, 8], [3, 4])
+
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.axis('equal')
+    plt.title('Calculate the slopes of the two parts of the line.')
+    plt.show()
+
+
+names_from_user: [slope_left, slope_right]
+
+test_code: |
+
+    if not isinstance(slope_left, float):
+        feedback.finish(0, "Your computed slope_left is not a decimal.")
+    if not isinstance(slope_right, float):
+        feedback.finish(0, "Your computed slope_right is not a decimal.")
+    correct_slope_left = 0.5
+    correct_slope_right = 0.5
+    rel_err1 = abs(correct_slope_left-slope_left)/abs(correct_slope_left)
+    rel_err2 = abs(correct_slope_right-slope_right)/abs(correct_slope_right)
+    if rel_err1 < 0.1 and rel_err2 < 0.1:
+        feedback.finish(1, "Your computed slopes are correct. Well done!")
+    else:
+        feedback.finish(0, "Your computed slopes were incorrect.")
+
+
+correct_code: |
+    slope_left = 0.5
+    slope_right = 0.5
+
+
+initial_code: |
+    # Enter your slope value here.
+    slope_left = ...
+    slope_right = ...
+
