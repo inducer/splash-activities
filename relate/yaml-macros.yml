@@ -1,5 +1,8 @@
 {% macro indented_include(filename, n) -%}{%- filter indent(n) -%}{%- include filename -%}{%- endfilter %}{%- endmacro %}
 
+{% set in_progress_hw_permissions_exp = "[view, submit_answer, end_session, see_correctness, change_answer, set_roll_over_expiration_mode]" %}
+
+
 {% macro grace_rules(week) -%}
 rules:
   start:
@@ -38,8 +41,6 @@ rules:
       credit_percent: 0
 {%- endmacro %}
 
-{# {{{ hw preview #}
-
 {% macro hw_header_preview(nr=0) -%}
 title: "Homework Preview"
 description: |
@@ -75,5 +76,3 @@ rules:
         generates_grade: false
 
 {%- endmacro %}
-
-{# }}} #}
