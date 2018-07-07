@@ -1,6 +1,7 @@
 type: ChoiceQuestion
 id: slope_tough
 shuffle: True
+title: Introduction to slope
 prompt: |
     Now that you are familiar with the concept of slope, let us try a tough
     one. The answer has to be correct within 0.1 of the actual answer

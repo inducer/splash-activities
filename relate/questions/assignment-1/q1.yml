@@ -1,6 +1,7 @@
 type: ChoiceQuestion
 id: explain_slope
 shuffle: True
+title: Introduction to slope
 prompt: |
     Using the graph paper sketches below calculate the slope. The length of the
     orange line represents $\bigtriangleup x$ and the length of the green line

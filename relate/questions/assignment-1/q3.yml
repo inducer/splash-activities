@@ -1,6 +1,7 @@
 type: ChoiceQuestion
 id: a_tale_of_two_slopes
 shuffle: True
+title: Introduction to slope
 prompt: |
     Calculate the slopes of the 2 different sections of a line shown below.
 
