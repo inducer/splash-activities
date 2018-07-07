@@ -1,4 +1,5 @@
-{% from "yaml-macros.yml" import indented_include %}
+{% from "yaml-macros.yml" import indented_include, hw_header_preview %}
+{{ hw_header_preview }}
 
 pages:
 
