@@ -1,5 +1,5 @@
 type: ChoiceQuestion
-id: slope_of_bendy_curve
+id: slope_of_bendy_curve_1
 shuffle: True
 title: Slope of a Bendy curve
 prompt: |
