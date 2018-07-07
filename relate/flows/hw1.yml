@@ -37,7 +37,7 @@ rules:
     # Record grades under the machine-readable name 'test_quiz'.
     # If there is more than one grade, use the maximum.
 
-    grade_identifier: test_quiz
+    grade_identifier: test_hw_1
     grade_aggregation_strategy: max_grade
 
     grading:
