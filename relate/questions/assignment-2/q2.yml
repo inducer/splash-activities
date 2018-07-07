@@ -5,10 +5,10 @@ title: Slope of a bendy curve
 prompt: |
     # Slope of a bendy curve - II
 
-
     We have a bendy curve, will the slope of such a curve be same as what we
     observed in the previous assignment. Calculate the slope using the given
     points.
+
 
     ![image](repo:relate/images/ass_2_q2.png)
 
@@ -21,5 +21,6 @@ choices:
     - 35
 
 answer_explanation: |
+
     $\bigtriangleup x = 55$
     $\bigtriangleup y = 20$
