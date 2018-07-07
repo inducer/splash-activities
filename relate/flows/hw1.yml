@@ -1,47 +1,37 @@
 {% from "yaml-macros.yml" import indented_include %}
 
-title: "Assignment 1"
+title: "Assignment-1 Preview"
 description: |
-
-    # RELATE Test Quiz
-
+    # Assignment-1 Preview
+completion_text: |
+    # All done!
 rules:
-    # (Things behind '#' hash marks are comments.)
-    # Allow students to start two attempts at the quiz before the deadline.
-    # After that, only allow access to previously started quizzes.
+    tags:
+    - main
 
     start:
     -
-        if_after: 2015-03-06 23:59:00
-        if_has_role: [student, ta, instructor]
-        if_has_fewer_sessions_than: 2
+        if_has_role: [ta, instructor]
+        if_has_fewer_sessions_than: 1
         may_start_new_session: True
         may_list_existing_sessions: True
+        tag_session: main
 
     -
+        if_has_role: [ta, instructor]
         may_start_new_session: False
         may_list_existing_sessions: True
 
-    # Allow students to submit quiz answers before the deadline.
-    # After the deadline, the quiz becomes read-only. (The 'modify'
-    # permission goes away.)
-
     access:
     -
-        if_after: 2015-03-06 23:59:02
-        permissions: [view, submit_answer, end_session, see_correctness]
+        if_has_role: [ta,instructor]
+        permissions: [view, submit_answer, end_session, see_correctness, see_answer_before_submission,
+          see_answer_after_submission, change_answer]
 
-    -
-        permissions: [view, see_correctness, see_answer_after_submission]
-
-    # Record grades under the machine-readable name 'test_quiz'.
-    # If there is more than one grade, use the maximum.
-
-    grade_identifier: test_hw_1
-    grade_aggregation_strategy: max_grade
-
+    grade_identifier: null
     grading:
-    -   credit_percent: 100
+    -
+        generates_grade: false
 
 
 pages:
