@@ -1,3 +1,5 @@
+{% from "yaml-macros.yml" import indented_include %}
+
 title: "Assignment 2"
 description: |
 
