@@ -6,14 +6,11 @@ access_rules:
 value: 1
 timeout: 10
 
-
 prompt: |
     # Slope of a bendy curve - II
     We have a bendy curve, will the slope of such a curve be same as what we
     observed in the previous assignment. Calculate the slope using the given
     points.
-
-
 
 setup_code: |
     import numpy as np
@@ -36,7 +33,8 @@ setup_code: |
     plt.plot(x, y, color='r')
 
     # setting the x1, x2
-    x1, y1 = 12, 0.0625*12**2+1
+    x1 = 12
+    y1 = 0.0625*x1**2 + 1
     x2, y2 = 32, 0.0625*32**2+1
 
     # plotting the line parallel to x-axis
@@ -47,17 +45,13 @@ setup_code: |
     # highlighting the points of intersection
     plt.scatter([x1, x2], [y1, y2])
 
-
     plt.xlabel('X')
     plt.ylabel('Y')
     plt.axis('equal')
     plt.title('Slope of a bendy curve.')
     plt.show()
 
-
 names_from_user: [slope]
-
-
 
 test_code: |
 
@@ -70,14 +64,9 @@ test_code: |
     else:
         feedback.finish(0, "Your computed slope was incorrect.")
 
-
-
 correct_code: |
     slope = 2.75
-
-
 
 initial_code: |
     # Enter your slope value here.
     slope = ...
-
