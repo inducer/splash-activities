@@ -70,17 +70,17 @@ pages:
     type: Page
     content: |
 
-        # Waves in One Dimension
+        # Waves on a String
 
         {% from "content-macros.jinja" import binder_notebook %}
         {{ binder_notebook("binder_1", "Waves%20in%20One%20Dimension.ipynb") }}
 
 -
-    id: waves_source
+    id: waves_2d_source
     type: Page
     content: |
 
-        # Waves in One Dimension
+        # Waves in a Pool
 
         {% from "content-macros.jinja" import binder_notebook %}
         {{ binder_notebook("binder_1", "Wave%20Pool%20with%20Source.ipynb") }}
@@ -95,6 +95,15 @@ pages:
         {% from "content-macros.jinja" import binder_notebook %}
         {{ binder_notebook("binder_1", "Video%20comparison.ipynb") }}
 
+-
+    id: waves_2d_shadow
+    type: Page
+    content: |
+
+        # Waves in a Pool
+
+        {% from "content-macros.jinja" import binder_notebook %}
+        {{ binder_notebook("binder_1", "Wave%20Pool%20with%20Shadows.ipynb") }}
 completion_text: |
 
     # Nice to see you!
