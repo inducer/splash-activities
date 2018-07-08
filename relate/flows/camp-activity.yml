@@ -48,17 +48,52 @@ pages:
         Welcome to the your camp activity to learn about waves!
 
 -
-    id: notebook_embed
+    {{ indented_include("questions/explain-slope.yml", 4) }}
+
+-
+    {{ indented_include("questions/slope-tough.yml", 4) }}
+
+-
+    {{ indented_include("questions/two-slopes.yml", 4) }}
+
+-
+    {{ indented_include("questions/slope-bendy.yml", 4) }}
+
+-
+    {{ indented_include("questions/slope-bendy-2.yml", 4) }}
+
+-
+    {{ indented_include("questions/slope-bendy-3.yml", 4) }}
+
+-
+    id: waves_1d
     type: Page
     content: |
 
-        # Embedding a Notebook
+        # Waves in One Dimension
+
+        {% from "content-macros.jinja" import binder_notebook %}
+        {{ binder_notebook("binder_1", "Waves%20in%20One%20Dimension.ipynb") }}
+
+-
+    id: waves_source
+    type: Page
+    content: |
+
+        # Waves in One Dimension
+
+        {% from "content-macros.jinja" import binder_notebook %}
+        {{ binder_notebook("binder_1", "Wave%20Pool%20with%20Source.ipynb") }}
+
+-
+    id: video_compare
+    type: Page
+    content: |
+
+        # Comparing with Reality
 
         {% from "content-macros.jinja" import binder_notebook %}
         {{ binder_notebook("binder_1", "Video%20comparison.ipynb") }}
-
--
-    {{ indented_include("questions/autograded-python-example.yml", 4) }}
 
 completion_text: |
 
