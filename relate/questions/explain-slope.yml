@@ -16,6 +16,9 @@ prompt: |
 
     To check your answer enter the slope in the box as `slope=1`(if the slope is 1)
 
+    **Note:** In this and the following questions, click "Submit answer for feedback"
+    (without answering the question) to see the picture referenced above.
+
 setup_code: |
     import numpy as np
     import matplotlib.pyplot as plt
