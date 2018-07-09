@@ -19,50 +19,61 @@ prompt: |
     **Note:** In this and the following questions, click "Submit answer for feedback"
     (without answering the question at first) to see the figure referenced above.
 
+
 setup_code: |
     import numpy as np
     import matplotlib.pyplot as plt
     from matplotlib.ticker import MultipleLocator
 
-    x = np.linspace(0, 10)
-    y = 3*x  # choosing '3' as the slope
+    def process_answer(question_version, dummy_slope):
+        if question_version not in range(1, 10):
+            raise RuntimeError("question_version must be from 1 to 9.")
 
-    fig, ax = plt.subplots()
-    ax.plot(x, y)
+        slopes = [3, 0.25, 2, 4, 6, 0.5, 1, 5, 0.125]
+        x1s = [2, 4, 1, 2, 1, 2, 3, 1, 0]
+        x2s = [6, 8, 7, 5, 3, 6, 7, 6, 8]
+        x1, x2, slope = x1s[question_version-1], x2s[question_version-1], slopes[question_version-1]
 
-    ax.xaxis.set_major_locator(MultipleLocator(2))
-    ax.xaxis.set_minor_locator(MultipleLocator(1))
-    ax.yaxis.set_major_locator(MultipleLocator(2))
-    ax.yaxis.set_minor_locator(MultipleLocator(1))
+        y1, y2 = slope*x1, slope*x2
+        x = np.linspace(0, 10)
+        y = slope*x  # choosing '3' as the slope
 
-    plt.grid(b=True, which='major', color='k', linestyle='-', lw=0.2)
-    plt.grid(b=True, which='minor', color='k', linestyle='--', lw=0.2)
+        fig, ax = plt.subplots()
+        ax.plot(x, y)
 
-    # plotting the line
-    plt.plot(x, y, color='r')
+        ax.xaxis.set_major_locator(MultipleLocator(2))
+        ax.xaxis.set_minor_locator(MultipleLocator(1))
+        ax.yaxis.set_major_locator(MultipleLocator(2))
+        ax.yaxis.set_minor_locator(MultipleLocator(1))
 
-    # plotting the line parallel to x-axis
-    plt.plot(np.linspace(2, 6, 100), 6*np.ones(100))
-    # plotting the line parallel to y-axis
-    plt.plot(6*np.ones(100), np.linspace(6, 18, 100))
+        plt.grid(b=True, which='major', color='k', linestyle='-', lw=0.2)
+        plt.grid(b=True, which='minor', color='k', linestyle='--', lw=0.2)
 
-    # highlighting the points of intersection
-    plt.scatter([2, 6], [6, 18])
+        # plotting the line
+        plt.plot(x, y, color='r')
 
+        # plotting the line parallel to x-axis
+        plt.plot(np.linspace(x1, x2, 100), y1*np.ones(100))
+        # plotting the line parallel to y-axis
+        plt.plot(x2*np.ones(100), np.linspace(y1, y2, 100))
 
-    plt.xlabel('X')
-    plt.ylabel('Y')
-    plt.axis('equal')
-    plt.title('A line with slope ???')
-    plt.show()
+        # highlighting the points of intersection
+        plt.scatter([x1, x2], [y1, y2])
 
-names_from_user: [slope]
+        plt.xlabel('X')
+        plt.ylabel('Y')
+        plt.axis('equal')
+        plt.title('A line with slope ???')
+        plt.show()
+
+names_for_user: [process_answer]
+names_from_user: [question_version, slope]
 
 test_code: |
-
-    if not isinstance(slope, float):
+    correct_slopes = [3, 0.25, 2, 4, 6, 0.5, 1, 5, 0.125]
+    correct_slope = correct_slopes[question_version-1]
+    if not isinstance(slope, (float, int)):
         feedback.finish(0, "Your computed slope is not a decimal.")
-    correct_slope = 3.00
     rel_err = abs(correct_slope-slope)/abs(correct_slope)
     if rel_err < 0.1:
         feedback.finish(1, "Your computed slope was correct. Well done!")
@@ -70,8 +81,10 @@ test_code: |
         feedback.finish(0, "Your computed slope was incorrect.")
 
 correct_code: |
-    slope = 3.00
+    slope = correct_slopes[question_version-1]
 
 initial_code: |
-    # Enter your slope value here.
+    question_version = 1
     slope = ...
+    process_answer(question_version, slope)
+
