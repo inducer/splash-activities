@@ -1,7 +1,7 @@
 # Interactive Simulation Activities for Middle Schoolers
 
 * [Binder Root Directory](https://mybinder.org/v2/gh/inducer/splash-activities/master)
-* [Bendiness as slope of slopes](https://mybinder.org/v2/gh/inducer/splash-activities/master?filepath=Bendiness%20as%20Slope%20of%20Slopes.ipynb)
+* [Bendiness as slope of slopes](https://mybinder.org/v2/gh/inducer/splash-activities/add_bendiness_activity?filepath=Bendiness%20as%20Slope%20of%20Slopes.ipynb)
 * [Waves on a String](https://mybinder.org/v2/gh/inducer/splash-activities/master?filepath=Waves%20in%20One%20Dimension.ipynb)
 * [Wave Pool](https://mybinder.org/v2/gh/inducer/splash-activities/master?filepath=Simulated%20Wave%20Pool.ipynb)
 * [Double Slit Experiment](https://mybinder.org/v2/gh/inducer/splash-activities/master?filepath=Wave%20Pool%20with%20Source.ipynb)
