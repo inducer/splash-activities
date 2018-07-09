@@ -66,6 +66,16 @@ pages:
     {{ indented_include("questions/slope-bendy-3.yml", 4) }}
 
 -
+    id: bendiness_as_slope_of_slopes
+    type: Page
+    content: |
+
+        # Bendiness as slope of slopes
+
+        {% from "content-macros.jinja" import binder_notebook %}
+        {{ binder_notebook("binder_1", "Bendiness%20as%20Slope%20of%20Slopes.ipynb") }}
+
+-
     id: waves_1d
     type: Page
     content: |
