@@ -27,6 +27,7 @@ setup_code: |
 
     def process_answer(question_version, dummy_slope):
         if question_version not in range(1, 10):
+            return
             raise RuntimeError("question_version must be from 1 to 9.")
 
         slopes = [3, 0.25, 2, 4, 6, 0.5, 1, 5, 0.125]
@@ -70,6 +71,9 @@ names_for_user: [process_answer]
 names_from_user: [question_version, slope]
 
 test_code: |
+
+    if question_version not in range(1, 10):
+        feedback.finish(0, "question_version must be from 1 to 9.")
     correct_slopes = [3, 0.25, 2, 4, 6, 0.5, 1, 5, 0.125]
     correct_slope = correct_slopes[question_version-1]
     if not isinstance(slope, (float, int)):
