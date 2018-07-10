@@ -6,63 +6,84 @@ access_rules:
 value: 1
 timeout: 10
 
-
 prompt: |
     # Introduction to the slope of a line - III
     Calculate the slopes of two different sections of a line shown below.
+
 
 setup_code: |
     import numpy as np
     import matplotlib.pyplot as plt
     from matplotlib.ticker import MultipleLocator
 
-    x = np.linspace(0, 10)
-    y = 0.5*x  # choosing '0.5' as the slope
+    def process_answer(question_version, dummy_slope_left, dummy_slope_right):
 
-    fig, ax = plt.subplots()
-    ax.plot(x, y)
+        if question_version not in range(1, 6):
+            return
 
-    ax.xaxis.set_major_locator(MultipleLocator(2))
-    ax.xaxis.set_minor_locator(MultipleLocator(1))
-    ax.yaxis.set_major_locator(MultipleLocator(2))
-    ax.yaxis.set_minor_locator(MultipleLocator(1))
+        slopes = [0.5, -1, -4, 6, 2]
+        x1s = [2, 0, 2, 1, 2]
+        x2s = [4, 1, 5, 5, 4]
+        x3s = [6, 5, 7, 7, 6]
+        x4s = [8, 9, 8, 9, 9]
 
-    plt.grid(b=True, which='major', color='k', linestyle='-', lw=0.2)
-    plt.grid(b=True, which='minor', color='k', linestyle='--', lw=0.2)
+        slope = slopes[question_version-1]
+        x1 = x1s[question_version-1]
+        x2 = x2s[question_version-1]
+        x3 = x3s[question_version-1]
+        x4 = x4s[question_version-1]
 
-    # plotting the line
-    plt.plot(x, y, color='r')
+        x = np.linspace(0, 10)
+        y = slope*x
 
-    # plotting the line parallel to x-axis
-    plt.plot(np.linspace(2, 4, 100), 1*np.ones(100))
-    plt.plot(np.linspace(6, 8, 100), 3*np.ones(100))
-    # plotting the line parallel to y-axis
-    plt.plot(4*np.ones(100), np.linspace(1, 2, 100))
-    plt.plot(8*np.ones(100), np.linspace(3, 4, 100))
+        fig, ax = plt.subplots()
+        ax.plot(x, y)
 
-    # highlighting the points of intersection
-    plt.scatter([2, 4], [1, 2])
-    plt.scatter([6, 8], [3, 4])
+        ax.xaxis.set_major_locator(MultipleLocator(2))
+        ax.xaxis.set_minor_locator(MultipleLocator(1))
+        ax.yaxis.set_major_locator(MultipleLocator(2))
+        ax.yaxis.set_minor_locator(MultipleLocator(1))
 
-    plt.xlabel('X')
-    plt.ylabel('Y')
-    plt.axis('equal')
-    plt.title('Calculate the slopes of the two parts of the line.')
-    plt.show()
+        plt.grid(b=True, which='major', color='k', linestyle='-', lw=0.2)
+        plt.grid(b=True, which='minor', color='k', linestyle='--', lw=0.2)
 
+        # plotting the line
+        plt.plot(x, y, color='r')
 
-names_from_user: [slope_left, slope_right]
+        # plotting the line parallel to x-axis
+        plt.plot(np.linspace(x1, x2, 100), slope*x1**np.ones(100))
+        plt.plot(np.linspace(x3, x4, 100), slope*x3*np.ones(100))
+        # plotting the line parallel to y-axis
+        plt.plot(x2*np.ones(100), np.linspace(slope*x1, slope*x2, 100))
+        plt.plot(x4*np.ones(100), np.linspace(slope*x3, slope*x4, 100))
+
+        # highlighting the points of intersection
+        plt.scatter([x1, x2], [slope*x1, slope*x2])
+        plt.scatter([x3, x4], [slope*x3, slope*x4])
+
+        plt.xlabel('X')
+        plt.ylabel('Y')
+        plt.axis('equal')
+        plt.title('Calculate the slopes of the two parts of the line.')
+        plt.show()
+
+names_for_user: [process_answer]
+names_from_user: [question_version, slope_left, slope_right]
 
 test_code: |
+    if question_version not in range(1, 6):
+        feedback.finish(0, "question_version must be from 1 to 5.")
 
-    if not isinstance(slope_left, float):
+    correct_slopes = [0.5, -1, -4, 6, 2]
+    correct_slope = correct_slopes[question_version-1]
+
+    if not isinstance(slope_left, (int, float)):
         feedback.finish(0, "Your computed slope_left is not a decimal.")
-    if not isinstance(slope_right, float):
+    if not isinstance(slope_right, (int, float)):
         feedback.finish(0, "Your computed slope_right is not a decimal.")
-    correct_slope_left = 0.5
-    correct_slope_right = 0.5
-    rel_err1 = abs(correct_slope_left-slope_left)/abs(correct_slope_left)
-    rel_err2 = abs(correct_slope_right-slope_right)/abs(correct_slope_right)
+
+    rel_err1 = abs(correct_slope-slope_left)/abs(correct_slope)
+    rel_err2 = abs(correct_slope-slope_right)/abs(correct_slope)
     if rel_err1 < 0.1 and rel_err2 < 0.1:
         feedback.finish(1, "Your computed slopes are correct. Well done!")
     else:
@@ -70,12 +91,14 @@ test_code: |
 
 
 correct_code: |
-    slope_left = 0.5
-    slope_right = 0.5
+    ...
 
 
 initial_code: |
+    question_version = 1
     # Enter your slope value here.
     slope_left = ...
     slope_right = ...
+
+    process_answer(question_version, slope_left, slope_right)
 
