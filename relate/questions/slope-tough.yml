@@ -19,7 +19,7 @@ setup_code: |
 
     def process_answer(question_version, dummy_slope):
         if question_version not in range(1, 10):
-            raise RuntimeError("question_version must be from 1 to 9.")
+            return
 
         slopes = [1.72, -3.14, 0.27, -2.72,  0.67, -1.62, 5.93, 2.55, 0.23]
         intercepts = [12, -56, -90, 54, 107, 22, 0, 16, -17]
@@ -58,6 +58,8 @@ names_for_user: [process_answer]
 names_from_user: [question_version, slope]
 
 test_code: |
+    if question_version not in range(1, 10):
+        feedback.finish(0, "question_version must be from 1 to 9.")
     correct_slopes = [1.72, -3.14, 0.27, -2.72,  0.67, -1.62, 5.93, 2.55, 0.23]
     if not isinstance(slope, (float, int)):
         feedback.finish(0, "Your computed slope is not a decimal.")
