@@ -19,20 +19,19 @@ prompt: |
     **Note:** In this and the following questions, click "Submit answer for feedback"
     (without answering the question at first) to see the figure referenced above.
 
-
 setup_code: |
     import numpy as np
     import matplotlib.pyplot as plt
     from matplotlib.ticker import MultipleLocator
 
     def process_answer(question_version, dummy_slope):
-        if question_version not in range(1, 10):
-            return
-
-        slopes = [3, 0.25, 2, 4, 6, 0.5, 1, 5, 0.125]
-        x1s = [2, 4, 1, 2, 1, 2, 3, 1, 0]
-        x2s = [6, 8, 7, 5, 3, 6, 7, 6, 8]
-        x1, x2, slope = x1s[question_version-1], x2s[question_version-1], slopes[question_version-1]
+        np.random.seed(question_version)
+        slope = np.random.randint(-8, 8)
+        x1 = np.random.randint(0, 10)
+        x2 = np.random.randint(0, 10)
+        while x1 == x2:
+            x2 = np.random.randint(0, 10)
+        x1, x2 = min(x1, x2), max(x1, x2)
 
         y1, y2 = slope*x1, slope*x2
         x = np.linspace(0, 10)
@@ -70,15 +69,14 @@ names_for_user: [process_answer]
 names_from_user: [question_version, slope]
 
 test_code: |
+    np.random.seed(question_version)
+    correct_slope = np.random.randint(-8, 8)
 
-    if question_version not in range(1, 10):
-        feedback.finish(0, "question_version must be from 1 to 9.")
-    correct_slopes = [3, 0.25, 2, 4, 6, 0.5, 1, 5, 0.125]
-    correct_slope = correct_slopes[question_version-1]
     if not isinstance(slope, (float, int)):
         feedback.finish(0, "Your computed slope is not a decimal.")
-    rel_err = abs(correct_slope-slope)/abs(correct_slope)
-    if rel_err < 0.1:
+    err = abs(correct_slope-slope)
+
+    if err < 0.1:
         feedback.finish(1, "Your computed slope was correct. Well done!")
     else:
         feedback.finish(0, "Your computed slope was incorrect.")
