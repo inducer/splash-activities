@@ -6,10 +6,10 @@ access_rules:
 value: 1
 timeout: 10
 
+
 prompt: |
     # Introduction to the slope of a line - III
     Calculate the slopes of two different sections of a line shown below.
-
 
 setup_code: |
     import numpy as np
@@ -18,20 +18,28 @@ setup_code: |
 
     def process_answer(question_version, dummy_slope_left, dummy_slope_right):
 
-        if question_version not in range(1, 6):
-            return
+        np.random.seed(question_version)
 
-        slopes = [0.5, -1, -4, 6, 2]
-        x1s = [2, 0, 2, 1, 2]
-        x2s = [4, 1, 5, 5, 4]
-        x3s = [6, 5, 7, 7, 6]
-        x4s = [8, 9, 8, 9, 9]
+        # adding some restrictions just to make the plots pretty
+        # do I get rid of there?
+        slope = np.random.randint(-8, 8)
+        to_reciprocate = np.random.randint(0, 1)
+        if to_reciprocate:
+            slope = 1.0/slope
 
-        slope = slopes[question_version-1]
-        x1 = x1s[question_version-1]
-        x2 = x2s[question_version-1]
-        x3 = x3s[question_version-1]
-        x4 = x4s[question_version-1]
+        x1 = np.random.randint(0, 5)
+        if x1 <3:
+            x2 = x1 + np.random.randint(2, 5-x1)
+        else:
+            x2 = x1 - np.random.randint(2, x1)
+        x1, x2 = min(x1, x2), max(x1, x2)
+
+        x3 = np.random.randint(5, 10)
+        if x3 <8:
+            x4 = x3 + np.random.randint(2, 5-x3)
+        else:
+            x4 = x3 - np.random.randint(2, x3)
+        x3, x4 = min(x3, x4), max(x3, x4)
 
         x = np.linspace(0, 10)
         y = slope*x
@@ -71,27 +79,28 @@ names_for_user: [process_answer]
 names_from_user: [question_version, slope_left, slope_right]
 
 test_code: |
-    if question_version not in range(1, 6):
-        feedback.finish(0, "question_version must be from 1 to 5.")
+    np.random.seed(question_version)
 
-    correct_slopes = [0.5, -1, -4, 6, 2]
-    correct_slope = correct_slopes[question_version-1]
+    correct_slope = np.random.randint(-8, 8)
+    to_reciprocate = np.random.randint(0, 1)
+    if to_reciprocate:
+        correct_slope = 1.0/correct_slope
 
     if not isinstance(slope_left, (int, float)):
         feedback.finish(0, "Your computed slope_left is not a decimal.")
     if not isinstance(slope_right, (int, float)):
         feedback.finish(0, "Your computed slope_right is not a decimal.")
-
-    rel_err1 = abs(correct_slope-slope_left)/abs(correct_slope)
-    rel_err2 = abs(correct_slope-slope_right)/abs(correct_slope)
-    if rel_err1 < 0.1 and rel_err2 < 0.1:
+    
+    if abs(correct_slope) < 0.1:
+        err1 = abs(correct_slope-slope_left)
+        err2 = abs(correct_slope-slope_right)
+    else:
+        err1 = abs(correct_slope-slope_left)/abs(correct_slope)
+        err2 = abs(correct_slope-slope_right)/abs(correct_slope)
+    if err1 < 0.1 and err2 < 0.1:
         feedback.finish(1, "Your computed slopes are correct. Well done!")
     else:
         feedback.finish(0, "Your computed slopes were incorrect.")
-
-
-correct_code: |
-    ...
 
 
 initial_code: |
@@ -101,4 +110,3 @@ initial_code: |
     slope_right = ...
 
     process_answer(question_version, slope_left, slope_right)
-

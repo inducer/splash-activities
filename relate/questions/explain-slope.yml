@@ -28,11 +28,10 @@ setup_code: |
         np.random.seed(question_version)
         slope = np.random.randint(-8, 8)
         x1 = np.random.randint(0, 10)
-        x2 = np.random.randint(0, 10)
         if x1 <=6:
-            x2 = x1 + np.randint(2, 10-x1)
+            x2 = x1 + np.random.randint(2, 10-x1)
         else:
-            x2 = x1 - np.randint(2, x1)
+            x2 = x1 - np.random.randint(2, x1)
         x1, x2 = min(x1, x2), max(x1, x2)
 
         y1, y2 = slope*x1, slope*x2
@@ -82,9 +81,6 @@ test_code: |
         feedback.finish(1, "Your computed slope was correct. Well done!")
     else:
         feedback.finish(0, "Your computed slope was incorrect.")
-
-correct_code: |
-    slope = correct_slopes[question_version-1]
 
 initial_code: |
     question_version = 1

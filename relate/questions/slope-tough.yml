@@ -65,9 +65,6 @@ test_code: |
     else:
         feedback.finish(0, "Your computed slope was incorrect.")
 
-correct_code: |
-    slope = correct_slopes[question_version-1]
-
 initial_code: |
     question_version = 1
     slope = ...
