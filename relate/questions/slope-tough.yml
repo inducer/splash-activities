@@ -6,6 +6,7 @@ access_rules:
 value: 1
 timeout: 10
 
+
 prompt: |
     # Introduction to the slope of a line - II
 
@@ -18,18 +19,11 @@ setup_code: |
     from matplotlib.ticker import MultipleLocator
 
     def process_answer(question_version, dummy_slope):
-        if question_version not in range(1, 10):
-            return
-
-        slopes = [1.72, -3.14, 0.27, -2.72,  0.67, -1.62, 5.93, 2.55, 0.23]
-        intercepts = [12, -56, -90, 54, 107, 22, 0, 16, -17]
-        x_lefts = [42, -15, 37, 62, -90, 7, -65, 12, -39 ]
-        x_rights = [52, -5, 47, 72, -80, 17, -55, 22, -29]
-
-        slope = slopes[question_version-1]
-        intercept = intercepts[question_version-1]
-        x_left = x_lefts[question_version-1]
-        x_right = x_rights[question_version-1]
+        np.random.seed(question_version)
+        slope = np.random.randint(-8, 8) + np.random.randn(1)[0]
+        x_left = np.random.randn(1)[0] + np.random.randint(-10, 10)
+        x_right = x_left + np.random.randint(3, 10)
+        intercept = np.random.randn(1)[0] + np.random.randint(-20, 20)
 
         x = np.linspace(x_left, x_right)
         y = slope*x + intercept
@@ -58,22 +52,21 @@ names_for_user: [process_answer]
 names_from_user: [question_version, slope]
 
 test_code: |
-    if question_version not in range(1, 10):
-        feedback.finish(0, "question_version must be from 1 to 9.")
-    correct_slopes = [1.72, -3.14, 0.27, -2.72,  0.67, -1.62, 5.93, 2.55, 0.23]
+    np.random.seed(question_version)
+    correct_slope = np.random.randint(-8, 8) + np.random.randn(1)[0]
     if not isinstance(slope, (float, int)):
         feedback.finish(0, "Your computed slope is not a decimal.")
-    correct_slope = correct_slopes[question_version-1]
-    rel_err = abs(correct_slope-slope)/abs(correct_slope)
-    if rel_err < 0.1:
+    if abs(correct_slope) < 1:
+        err = abs(correct_slope-slope)
+    else:
+        err = abs(correct_slope-slope)/abs(correct_slope)
+    if err < 0.15:
         feedback.finish(1, "Your computed slope was correct. Well done!")
     else:
         feedback.finish(0, "Your computed slope was incorrect.")
 
-
 correct_code: |
     slope = correct_slopes[question_version-1]
-
 
 initial_code: |
     question_version = 1
