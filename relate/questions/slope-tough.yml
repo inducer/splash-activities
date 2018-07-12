@@ -28,7 +28,7 @@ setup_code: |
         x = np.linspace(x_left, x_right)
         y = slope*x + intercept
 
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(12,12))
         ax.plot(x, y)
 
         ax.xaxis.set_major_locator(MultipleLocator(1))

@@ -22,7 +22,7 @@ setup_code: |
     x = np.linspace(0, 33)
     y = 0.0625*x**2 + 1
 
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(12,12))
     ax.plot(x, y)
 
     ax.xaxis.set_major_locator(MultipleLocator(2))
