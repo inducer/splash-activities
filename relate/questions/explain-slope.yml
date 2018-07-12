@@ -16,8 +16,8 @@ prompt: |
 
     To check your answer enter the slope in the box as `slope=1`(if the slope is 1)
 
-    **Note:** In this and the following questions, click "Submit answer for feedback"
-    (without answering the question at first) to see the figure referenced above.
+    **Note:** Click "Submit answer for feedback" (without answering the
+    question at first) to see the figure referenced above.
 
 setup_code: |
     import numpy as np
@@ -83,7 +83,11 @@ test_code: |
         feedback.finish(0, "Your computed slope was incorrect.")
 
 initial_code: |
+    # Once done with a question increment the question version by 1.
     question_version = 1
-    slope = ...
-    process_answer(question_version, slope)
 
+    # your answer goes here.
+    slope = ...
+
+    # no change is needed here
+    process_answer(question_version, slope)

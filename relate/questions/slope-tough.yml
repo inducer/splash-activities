@@ -13,6 +13,8 @@ prompt: |
     Now that you are familiar with the concept of slope, let us try a tough
     one. Your answer has to be correct within $0.5$ of the actual answer.
 
+    **Note: ** Click "Submit answer for feedback"(without answering question at first) to see the figure referenced above.
+
 setup_code: |
     import numpy as np
     import matplotlib.pyplot as plt
@@ -62,7 +64,11 @@ test_code: |
         feedback.finish(0, "Your computed slope was incorrect.")
 
 initial_code: |
+    # once done with a question increment the question version by 1.
     question_version = 1
-    slope = ...
-    process_answer(question_version, slope)
 
+    # your answer goes here.
+    slope = ...
+
+    # no change is neeeded here.
+    process_answer(question_version, slope)
