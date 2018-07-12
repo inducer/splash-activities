@@ -36,9 +36,9 @@ setup_code: |
 
         x3 = np.random.randint(5, 10)
         if x3 <8:
-            x4 = x3 + np.random.randint(2, 5-x3)
+            x4 = x3 + np.random.randint(2, 10-x3)
         else:
-            x4 = x3 - np.random.randint(2, x3)
+            x4 = x3 - np.random.randint(2, x3-5)
         x3, x4 = min(x3, x4), max(x3, x4)
 
         x = np.linspace(0, 10)
