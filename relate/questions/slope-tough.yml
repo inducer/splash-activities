@@ -6,6 +6,7 @@ access_rules:
 value: 1
 timeout: 10
 
+
 prompt: |
     # Introduction to the slope of a line - II
 
@@ -17,47 +18,55 @@ setup_code: |
     import matplotlib.pyplot as plt
     from matplotlib.ticker import MultipleLocator
 
-    x = np.linspace(42, 52)
-    slope = 1.72
-    y = slope*x + 17  # choosing an intercept of 17
+    def process_answer(question_version, dummy_slope):
+        np.random.seed(question_version)
+        slope = np.random.randint(-8, 8) + np.random.randn(1)[0]
+        x_left = np.random.randn(1)[0] + np.random.randint(-10, 10)
+        x_right = x_left + np.random.randint(3, 10)
+        intercept = np.random.randn(1)[0] + np.random.randint(-20, 20)
 
-    fig, ax = plt.subplots()
-    ax.plot(x, y)
+        x = np.linspace(x_left, x_right)
+        y = slope*x + intercept
 
-    ax.xaxis.set_major_locator(MultipleLocator(1))
-    ax.xaxis.set_minor_locator(MultipleLocator(0.1))
-    ax.yaxis.set_major_locator(MultipleLocator(1))
-    ax.yaxis.set_minor_locator(MultipleLocator(0.1))
+        fig, ax = plt.subplots(figsize=(12,12))
+        ax.plot(x, y)
 
-    plt.grid(b=True, which='major', color='k', linestyle='-', lw=0.2)
-    plt.grid(b=True, which='minor', color='k', linestyle='--', lw=0.1)
+        ax.xaxis.set_major_locator(MultipleLocator(1))
+        ax.xaxis.set_minor_locator(MultipleLocator(0.1))
+        ax.yaxis.set_major_locator(MultipleLocator(1))
+        ax.yaxis.set_minor_locator(MultipleLocator(0.1))
 
-    # plotting the line
-    plt.plot(x, y, color='r')
+        plt.grid(b=True, which='major', color='k', linestyle='-', lw=0.2)
+        plt.grid(b=True, which='minor', color='k', linestyle='--', lw=0.1)
 
-    plt.xlabel('X')
-    plt.ylabel('Y')
-    plt.axis('equal')
-    plt.title('A line with slope ???')
-    plt.show()
+        # plotting the line
+        plt.plot(x, y, color='r')
 
+        plt.xlabel('X')
+        plt.ylabel('Y')
+        plt.axis('equal')
+        plt.title('A line with slope ???')
+        plt.show()
 
-names_from_user: [slope]
+names_for_user: [process_answer]
+names_from_user: [question_version, slope]
 
 test_code: |
-
-    if not isinstance(slope, float):
+    np.random.seed(question_version)
+    correct_slope = np.random.randint(-8, 8) + np.random.randn(1)[0]
+    if not isinstance(slope, (float, int)):
         feedback.finish(0, "Your computed slope is not a decimal.")
-    correct_slope = 1.72
-    rel_err = abs(correct_slope-slope)/abs(correct_slope)
-    if rel_err < 0.1:
+    if abs(correct_slope) < 1:
+        err = abs(correct_slope-slope)
+    else:
+        err = abs(correct_slope-slope)/abs(correct_slope)
+    if err < 0.15:
         feedback.finish(1, "Your computed slope was correct. Well done!")
     else:
         feedback.finish(0, "Your computed slope was incorrect.")
 
-correct_code: |
-    slope = 1.72
-
 initial_code: |
-    # Enter your slope value here.
+    question_version = 1
     slope = ...
+    process_answer(question_version, slope)
+

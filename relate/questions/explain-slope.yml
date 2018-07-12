@@ -24,54 +24,66 @@ setup_code: |
     import matplotlib.pyplot as plt
     from matplotlib.ticker import MultipleLocator
 
-    x = np.linspace(0, 10)
-    y = 3*x  # choosing '3' as the slope
+    def process_answer(question_version, dummy_slope):
+        np.random.seed(question_version)
+        slope = np.random.randint(-8, 8)
+        x1 = np.random.randint(0, 10)
+        if x1 <=6:
+            x2 = x1 + np.random.randint(2, 10-x1)
+        else:
+            x2 = x1 - np.random.randint(2, x1)
+        x1, x2 = min(x1, x2), max(x1, x2)
 
-    fig, ax = plt.subplots()
-    ax.plot(x, y)
+        y1, y2 = slope*x1, slope*x2
+        x = np.linspace(0, 10)
+        y = slope*x  # choosing '3' as the slope
 
-    ax.xaxis.set_major_locator(MultipleLocator(2))
-    ax.xaxis.set_minor_locator(MultipleLocator(1))
-    ax.yaxis.set_major_locator(MultipleLocator(2))
-    ax.yaxis.set_minor_locator(MultipleLocator(1))
+        fig, ax = plt.subplots(figsize=(12,12))
+        ax.plot(x, y)
 
-    plt.grid(b=True, which='major', color='k', linestyle='-', lw=0.2)
-    plt.grid(b=True, which='minor', color='k', linestyle='--', lw=0.2)
+        ax.xaxis.set_major_locator(MultipleLocator(2))
+        ax.xaxis.set_minor_locator(MultipleLocator(1))
+        ax.yaxis.set_major_locator(MultipleLocator(2))
+        ax.yaxis.set_minor_locator(MultipleLocator(1))
 
-    # plotting the line
-    plt.plot(x, y, color='r')
+        plt.grid(b=True, which='major', color='k', linestyle='-', lw=0.2)
+        plt.grid(b=True, which='minor', color='k', linestyle='--', lw=0.2)
 
-    # plotting the line parallel to x-axis
-    plt.plot(np.linspace(2, 6, 100), 6*np.ones(100))
-    # plotting the line parallel to y-axis
-    plt.plot(6*np.ones(100), np.linspace(6, 18, 100))
+        # plotting the line
+        plt.plot(x, y, color='r')
 
-    # highlighting the points of intersection
-    plt.scatter([2, 6], [6, 18])
+        # plotting the line parallel to x-axis
+        plt.plot(np.linspace(x1, x2, 100), y1*np.ones(100))
+        # plotting the line parallel to y-axis
+        plt.plot(x2*np.ones(100), np.linspace(y1, y2, 100))
 
+        # highlighting the points of intersection
+        plt.scatter([x1, x2], [y1, y2])
 
-    plt.xlabel('X')
-    plt.ylabel('Y')
-    plt.axis('equal')
-    plt.title('A line with slope ???')
-    plt.show()
+        plt.xlabel('X')
+        plt.ylabel('Y')
+        plt.axis('equal')
+        plt.title('A line with slope ???')
+        plt.show()
 
-names_from_user: [slope]
+names_for_user: [process_answer]
+names_from_user: [question_version, slope]
 
 test_code: |
+    np.random.seed(question_version)
+    correct_slope = np.random.randint(-8, 8)
 
-    if not isinstance(slope, float):
+    if not isinstance(slope, (float, int)):
         feedback.finish(0, "Your computed slope is not a decimal.")
-    correct_slope = 3.00
-    rel_err = abs(correct_slope-slope)/abs(correct_slope)
-    if rel_err < 0.1:
+    err = abs(correct_slope-slope)
+
+    if err < 0.1:
         feedback.finish(1, "Your computed slope was correct. Well done!")
     else:
         feedback.finish(0, "Your computed slope was incorrect.")
 
-correct_code: |
-    slope = 3.00
-
 initial_code: |
-    # Enter your slope value here.
+    question_version = 1
     slope = ...
+    process_answer(question_version, slope)
+

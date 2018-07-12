@@ -16,66 +16,97 @@ setup_code: |
     import matplotlib.pyplot as plt
     from matplotlib.ticker import MultipleLocator
 
-    x = np.linspace(0, 10)
-    y = 0.5*x  # choosing '0.5' as the slope
+    def process_answer(question_version, dummy_slope_left, dummy_slope_right):
 
-    fig, ax = plt.subplots()
-    ax.plot(x, y)
+        np.random.seed(question_version)
 
-    ax.xaxis.set_major_locator(MultipleLocator(2))
-    ax.xaxis.set_minor_locator(MultipleLocator(1))
-    ax.yaxis.set_major_locator(MultipleLocator(2))
-    ax.yaxis.set_minor_locator(MultipleLocator(1))
+        # adding some restrictions just to make the plots pretty
+        # do I get rid of there?
+        slope = np.random.randint(-8, 8)
+        to_reciprocate = np.random.randint(0, 1)
+        if to_reciprocate:
+            slope = 1.0/slope
 
-    plt.grid(b=True, which='major', color='k', linestyle='-', lw=0.2)
-    plt.grid(b=True, which='minor', color='k', linestyle='--', lw=0.2)
+        x1 = np.random.randint(0, 5)
+        if x1 <3:
+            x2 = x1 + np.random.randint(2, 5-x1)
+        else:
+            x2 = x1 - np.random.randint(2, x1)
+        x1, x2 = min(x1, x2), max(x1, x2)
 
-    # plotting the line
-    plt.plot(x, y, color='r')
+        x3 = np.random.randint(5, 10)
+        if x3 <8:
+            x4 = x3 + np.random.randint(2, 10-x3)
+        else:
+            x4 = x3 - np.random.randint(2, x3-5)
+        x3, x4 = min(x3, x4), max(x3, x4)
 
-    # plotting the line parallel to x-axis
-    plt.plot(np.linspace(2, 4, 100), 1*np.ones(100))
-    plt.plot(np.linspace(6, 8, 100), 3*np.ones(100))
-    # plotting the line parallel to y-axis
-    plt.plot(4*np.ones(100), np.linspace(1, 2, 100))
-    plt.plot(8*np.ones(100), np.linspace(3, 4, 100))
+        x = np.linspace(0, 10)
+        y = slope*x
 
-    # highlighting the points of intersection
-    plt.scatter([2, 4], [1, 2])
-    plt.scatter([6, 8], [3, 4])
+        fig, ax = plt.subplots(figsize=(12,12))
+        ax.plot(x, y)
 
-    plt.xlabel('X')
-    plt.ylabel('Y')
-    plt.axis('equal')
-    plt.title('Calculate the slopes of the two parts of the line.')
-    plt.show()
+        ax.xaxis.set_major_locator(MultipleLocator(2))
+        ax.xaxis.set_minor_locator(MultipleLocator(1))
+        ax.yaxis.set_major_locator(MultipleLocator(2))
+        ax.yaxis.set_minor_locator(MultipleLocator(1))
 
+        plt.grid(b=True, which='major', color='k', linestyle='-', lw=0.2)
+        plt.grid(b=True, which='minor', color='k', linestyle='--', lw=0.2)
 
-names_from_user: [slope_left, slope_right]
+        # plotting the line
+        plt.plot(x, y, color='r')
+
+        # plotting the line parallel to x-axis
+        plt.plot(np.linspace(x1, x2, 100), slope*x1**np.ones(100))
+        plt.plot(np.linspace(x3, x4, 100), slope*x3*np.ones(100))
+        # plotting the line parallel to y-axis
+        plt.plot(x2*np.ones(100), np.linspace(slope*x1, slope*x2, 100))
+        plt.plot(x4*np.ones(100), np.linspace(slope*x3, slope*x4, 100))
+
+        # highlighting the points of intersection
+        plt.scatter([x1, x2], [slope*x1, slope*x2])
+        plt.scatter([x3, x4], [slope*x3, slope*x4])
+
+        plt.xlabel('X')
+        plt.ylabel('Y')
+        plt.axis('equal')
+        plt.title('Calculate the slopes of the two parts of the line.')
+        plt.show()
+
+names_for_user: [process_answer]
+names_from_user: [question_version, slope_left, slope_right]
 
 test_code: |
+    np.random.seed(question_version)
 
-    if not isinstance(slope_left, float):
+    correct_slope = np.random.randint(-8, 8)
+    to_reciprocate = np.random.randint(0, 1)
+    if to_reciprocate:
+        correct_slope = 1.0/correct_slope
+
+    if not isinstance(slope_left, (int, float)):
         feedback.finish(0, "Your computed slope_left is not a decimal.")
-    if not isinstance(slope_right, float):
+    if not isinstance(slope_right, (int, float)):
         feedback.finish(0, "Your computed slope_right is not a decimal.")
-    correct_slope_left = 0.5
-    correct_slope_right = 0.5
-    rel_err1 = abs(correct_slope_left-slope_left)/abs(correct_slope_left)
-    rel_err2 = abs(correct_slope_right-slope_right)/abs(correct_slope_right)
-    if rel_err1 < 0.1 and rel_err2 < 0.1:
+    
+    if abs(correct_slope) < 0.1:
+        err1 = abs(correct_slope-slope_left)
+        err2 = abs(correct_slope-slope_right)
+    else:
+        err1 = abs(correct_slope-slope_left)/abs(correct_slope)
+        err2 = abs(correct_slope-slope_right)/abs(correct_slope)
+    if err1 < 0.1 and err2 < 0.1:
         feedback.finish(1, "Your computed slopes are correct. Well done!")
     else:
         feedback.finish(0, "Your computed slopes were incorrect.")
 
 
-correct_code: |
-    slope_left = 0.5
-    slope_right = 0.5
-
-
 initial_code: |
+    question_version = 1
     # Enter your slope value here.
     slope_left = ...
     slope_right = ...
 
+    process_answer(question_version, slope_left, slope_right)
