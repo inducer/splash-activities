@@ -11,7 +11,7 @@ prompt: |
     # Introduction to the slope of a line - II
 
     Now that you are familiar with the concept of slope, let us try a tough
-    one. The answer has to be correct within 0.1 of the actual answer.
+    one. Your answer has to be correct within $10\%$ of the actual answer.
 
 setup_code: |
     import numpy as np
@@ -32,9 +32,9 @@ setup_code: |
         ax.plot(x, y)
 
         ax.xaxis.set_major_locator(MultipleLocator(1))
-        ax.xaxis.set_minor_locator(MultipleLocator(0.1))
+        ax.xaxis.set_minor_locator(MultipleLocator(0.5))
         ax.yaxis.set_major_locator(MultipleLocator(1))
-        ax.yaxis.set_minor_locator(MultipleLocator(0.1))
+        ax.yaxis.set_minor_locator(MultipleLocator(0.5))
 
         plt.grid(b=True, which='major', color='k', linestyle='-', lw=0.2)
         plt.grid(b=True, which='minor', color='k', linestyle='--', lw=0.1)
