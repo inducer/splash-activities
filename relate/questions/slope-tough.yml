@@ -11,7 +11,7 @@ prompt: |
     # Introduction to the slope of a line - II
 
     Now that you are familiar with the concept of slope, let us try a tough
-    one. Your answer has to be correct within $10\%$ of the actual answer.
+    one. Your answer has to be correct within $0.5$ of the actual answer.
 
 setup_code: |
     import numpy as np
@@ -32,12 +32,9 @@ setup_code: |
         ax.plot(x, y)
 
         ax.xaxis.set_major_locator(MultipleLocator(1))
-        ax.xaxis.set_minor_locator(MultipleLocator(0.5))
         ax.yaxis.set_major_locator(MultipleLocator(1))
-        ax.yaxis.set_minor_locator(MultipleLocator(0.5))
 
-        plt.grid(b=True, which='major', color='k', linestyle='-', lw=0.2)
-        plt.grid(b=True, which='minor', color='k', linestyle='--', lw=0.1)
+        plt.grid(b=True, which='major', color='k', linestyle='-', lw=0.3)
 
         # plotting the line
         plt.plot(x, y, color='r')
@@ -56,11 +53,10 @@ test_code: |
     correct_slope = np.random.randint(-8, 8) + np.random.randn(1)[0]
     if not isinstance(slope, (float, int)):
         feedback.finish(0, "Your computed slope is not a decimal.")
-    if abs(correct_slope) < 1:
-        err = abs(correct_slope-slope)
-    else:
-        err = abs(correct_slope-slope)/abs(correct_slope)
-    if err < 0.15:
+    
+    # absolute error.
+    err = abs(correct_slope-slope)
+    if err < 0.5:
         feedback.finish(1, "Your computed slope was correct. Well done!")
     else:
         feedback.finish(0, "Your computed slope was incorrect.")
