@@ -16,8 +16,22 @@ prompt: |
 
     To check your answer enter the slope in the box as `slope=1`(if the slope is 1)
 
-    **Note:** Click "Submit answer for feedback" (without answering the
-    question at first) to see the figure referenced above.
+    ## How to use these exercises
+
+    1.  To see the figure referenced from the text, click "Submit answer for
+        feedback" (without answering the question at first).
+
+    1.  Type in the answer in the place of the three dots `...`.
+
+    1.  Click "Submit answer for feedback" to see whether you were right.
+
+    1.  Add one to the value `question_version` and click "Submit answer for
+        feedback" (leaving the old answer in place) to see the next figure.
+
+    1.  Type in the answer in the place of your previous answer.
+
+    1.  Click "Submit answer for feedback" to see whether you were right.
+        (and repeat)
 
 setup_code: |
     import numpy as np
