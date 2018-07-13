@@ -5,7 +5,7 @@ dependencies:
 - matplotlib
 - numpy
 - numba
-- ffmpeg
+- ffmpeg=4.0-0
 - x264=20131218
 - ipywidgets
 - imageio
