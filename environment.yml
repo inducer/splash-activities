@@ -9,3 +9,4 @@ dependencies:
 - x264=20131218
 - ipywidgets
 - imageio
+- reportlab
