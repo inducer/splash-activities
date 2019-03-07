@@ -6,6 +6,10 @@
 * Sources of "real-world" data for differencing?
 * Getting to slopes
 * How much code do they need to learn?
+    * Three skills
+        * Differencing / slopes
+        * Summing / integrating
+        * Plotting
 
 ## Action Items
 
