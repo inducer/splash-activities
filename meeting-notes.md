@@ -17,3 +17,4 @@
     * Given part of a quadratic, continue table based on keeping second difference constant
 * Change example to be continuous time
 * Ping Lenny?
+* Complete core computational skills notebook :)
