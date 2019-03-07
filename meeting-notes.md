@@ -11,6 +11,7 @@
         * Summing / integrating
         * Plotting
 * How to get from pen/paper to compute
+* When to test in front of kids?
 
 ## Action Items
 
