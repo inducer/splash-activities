@@ -4,6 +4,7 @@
 * Plot function values (by hand)
 * Take differences (in a table, by hand)
 * Take slopes (in a table, by hand)
+* Computers deliver "scalability" -> can do more interesting things
 * Do all of the above on a computer
 * Reconstructing a function from differences
     * Given a table of differences *and* an initial value
@@ -52,6 +53,20 @@
 # March 14
 
 ## Open Questions
+
+* What intermediate steps do we need on the coding end?
+    * Loops
+        * Write the repetitive code with values plugged in
+        * Write the repetive code with a variable assignment (and have the computer plug in)
+        * Ta-da loop
+    * Introduce a differencing loop
+        * The same way, maybe
+    * Data capture
+    * What does append do?
+
 ## Action Items
 
+* Jana/George: Work towards sequence of activities
+    * Capstone: "Differential equations" (aka be flexible in where the increments come from)
 * Andreas: look at Turing tumble
+* Andreas: cook up a data capture widget
