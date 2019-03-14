@@ -1,3 +1,31 @@
+# Learning goals
+
+* Build tables of function values (by hand)
+* Plot function values (by hand)
+* Take differences (in a table, by hand)
+* Take slopes (in a table, by hand)
+* Do all of the above on a computer
+* Reconstructing a function from differences
+    * Given a table of differences *and* an initial value
+* Dependency on step size, limits???
+    * Activity: Explore points of a function with different step sizes
+    * Connecting dots
+* Reconstructing a function from slopes
+    * Take differences, reconstruct (aka "fundamental theorem of calculus")
+* Reconstructing from data that doesn't come from slopes
+    * E.g. just take input to reconstruction to be 1, x, x**2, f (aka the function values -> expoential -> tada: differential equations! y'=y)
+* Muck around with differential equations/"initial value problems"
+* Systems of them (predator-prey/Lotka-Volterra)
+* Harmonic Oscillator
+* Second differences can be done using systems
+* Taking slopes in space *and* time -> waves
+
+## Things that are out of scope
+
+* Connecting dots in a way that's buttery smooth
+* Limits aka "what's the correct step size"
+* "Actual calculus" aka "Differentiating and Integrating"
+
 # March 7
 
 ## Open Questions
@@ -20,3 +48,10 @@
 * Change example to be continuous time
 * Ping Lenny?
 * Complete core computational skills notebook :)
+
+# March 14
+
+## Open Questions
+## Action Items
+
+* Andreas: look at Turing tumble
