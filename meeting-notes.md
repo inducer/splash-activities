@@ -75,4 +75,20 @@
 ### 3/26/19
 Andreas and George agree to have George and Jana work on a 3-day lesson/unit on using python to make lists of points and display them along with their second differences to illustrate the power programming with computers to make all the computational stuff with second differences 
 
-Andreas has dropped the python code for visualizing points at 
+Andreas has dropped the python code for visualizing points at capture-coords.py
+Andreas can create a javascript page so that students can do the activies on Chromebooks. 
+
+We need to have a list of "ah moments" such as
+
+- how tables connect to functions. Given that you have some function of something that produces data. A big idea is that points are approximations of the "true" function. 
+   - you can get a better idea of the true function by shrinking the step size. 
+- Slopes are meaningful quantities independent of step-size
+- Differencing is something that can be undone in that sense that you can get back to the function you started with.
+   -And taking slopes can also be undone by picking local slopes. 
+- Where do the increments come from? They do not have to come from the table we have, we could get them from using a formula to spit them out. 
+- Lo and behold, all the name-band functions (exp, log, sin, etc.) look not very complicated. !!
+(These are in fact differential equations, which are extremely handy for describing things in the real world that is not fake or contrived. )
+
+Coding-specific ah-has. 
+- you can recognize flat bits on the curve by looking at the numbers generated in capture-coords.py
+
