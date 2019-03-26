@@ -70,3 +70,9 @@
     * Capstone: "Differential equations" (aka be flexible in where the increments come from)
 * Andreas: look at Turing tumble
 * Andreas: cook up a data capture widget
+
+
+### 3/26/19
+Andreas and George agree to have George and Jana work on a 3-day lesson/unit on using python to make lists of points and display them along with their second differences to illustrate the power programming with computers to make all the computational stuff with second differences 
+
+Andreas has dropped the python code for visualizing points at 
