@@ -83,6 +83,7 @@ We need to have a list of "ah moments" such as
 - how tables connect to functions. Given that you have some function of something that produces data. A big idea is that points are approximations of the "true" function. 
    - you can get a better idea of the true function by shrinking the step size. 
 - Slopes are meaningful quantities independent of step-size
+   - "zooming in" is really related
 - Differencing is something that can be undone in that sense that you can get back to the function you started with.
    -And taking slopes can also be undone by picking local slopes. 
 - Where do the increments come from? They do not have to come from the table we have, we could get them from using a formula to spit them out. 
@@ -92,3 +93,6 @@ We need to have a list of "ah moments" such as
 Coding-specific ah-has. 
 - you can recognize flat bits on the curve by looking at the numbers generated in capture-coords.py
 
+### 4/19/19
+
+Link to data capture notebook: https://alpha.iodide.io/notebooks/1918/
