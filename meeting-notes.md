@@ -95,4 +95,7 @@ Coding-specific ah-has.
 
 ### 4/19/19
 
-Link to data capture notebook: https://alpha.iodide.io/notebooks/1918/
+Link to data capture notebook: 
+
+- New version: https://alpha.iodide.io/notebooks/2069/
+- Old version: https://alpha.iodide.io/notebooks/1918/
