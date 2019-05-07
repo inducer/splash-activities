@@ -99,3 +99,13 @@ Link to data capture notebook:
 
 - New version: https://alpha.iodide.io/notebooks/2069/
 - Old version: https://alpha.iodide.io/notebooks/1918/
+
+### 5/7/19
+
+- Urbana summer school: 6/26 to 7/16
+  - Email Andreas over the next couple days
+- Box folding for max finding as an illustration for utility of slopes
+- Reconstruct box volume function from slope
+- Changing step sizes
+  - Look-left slopes and look-right slopes don't agree -- why?
+  - Can we make that not matter -> decrease step size
