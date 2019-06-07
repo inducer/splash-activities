@@ -109,3 +109,15 @@ Link to data capture notebook:
 - Changing step sizes
   - Look-left slopes and look-right slopes don't agree -- why?
   - Can we make that not matter -> decrease step size
+### 5/13/19
+
+- What is a second example of the utility of slopes?
+  - Model building for running
+- Use phones as a data source
+
+### 6/7/19
+
+To what extent are we affected by these:
+
+- http://go.illinois.edu/POMpolicy
+- https://police.illinois.edu/services/protection-of-minors/
