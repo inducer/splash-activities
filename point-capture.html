@@ -1,0 +1,137 @@
+<doctype html5>
+<head>
+  <title>Point Capture</title>
+</head>
+<body>
+  <h1>Capturing Data From Points</h1>
+
+  <div style="margin-left: auto; margin-right: auto; width: 8em; padding-top:0; margin-top: 0">
+    <input  id="graph_top" value="10" type="number"></input>
+  </div>
+
+  <canvas style="width:100%; height: 500px;
+              border: 1px solid black;
+              "
+       id="graph_area">
+  </canvas>
+
+  <input id="graph_left" value="0" type="number" style="float:left"></input>
+  <input id="graph_right" value="10" type="number" style="float:right"></input>
+  <div style="margin-left: auto; margin-right: auto; width: 8em; padding-top:0; margin-top: 0">
+    <input type="number" id="graph_bottom" value="0" ></input>
+  </div>
+
+  <div style="clear:left; clear:right; margin-bottom: 2ex;"></div>
+
+  <textarea style="width:100%; height:10ex;
+              overflow-y:scroll;
+              border: 1px solid #ddd;
+              padding: 0.5ex;
+              "
+       id="code_output">
+  </textarea>
+
+  <button id="copy_to_clipboard">Copy to Clipboard</button>
+  <button id="clear_input">Clear Input</button>
+
+  <script>
+    "use strict";
+
+    var points = [];
+    var code_output;
+    var graph_area;
+    var context;
+
+    function scale_points(pts)
+    {
+      var left = Number(document.getElementById("graph_left").value)
+      var right = Number(document.getElementById("graph_right").value)
+      var top = Number(document.getElementById("graph_top").value)
+      var bottom = Number(document.getElementById("graph_bottom").value)
+
+      var new_pts = []
+      for (var pt of pts)
+      {
+        var x = pt[0];
+        var y = pt[1];
+        x /= graph_area.width
+        y = 1- y / graph_area.height
+
+        x = left + x*(right-left)
+        y = bottom + y*(top-bottom)
+        new_pts.push([x, y])
+      }
+
+      return new_pts
+    }
+
+    function onmousedown(event)
+    {
+      var new_pt = [event.offsetX, event.offsetY]
+      if (points.length)
+      {
+        var last_pt = points[points.length-1]
+        context.beginPath()
+        context.moveTo(new_pt[0], new_pt[1])
+        context.lineTo(last_pt[0], last_pt[1])
+        context.closePath()
+        context.stroke()
+      }
+      else
+      {
+        context.fillStyle = "red"
+        context.beginPath()
+        context.arc(new_pt[0], new_pt[1], 2, 0, 2*Math.pi)
+        context.closePath()
+        context.fill()
+      }
+
+      points.push(new_pt)
+
+      var pt_strings = []
+      for (var pt of scale_points(points))
+        pt_strings.push("["+pt[0].toString()+", "+pt[1].toString()+"]")
+
+      code_output.innerText = "np.array(["+pt_strings.join(", ")+"])"
+
+      graph_area.addEventListener('mousedown', onmousedown, {once: true})
+    }
+
+    function copy_to_clipboard(event)
+    {
+      code_output.focus()
+      code_output.select()
+      document.execCommand('copy')
+    }
+
+    function clear_input(event)
+    {
+      points = []
+
+      context.fillStyle = "#fff"
+      context.fillRect(0, 0, graph_area.width, graph_area.height)
+    }
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+      code_output = document.getElementById("code_output")
+
+      graph_area = document.getElementById("graph_area")
+      graph_area.width = graph_area.clientWidth
+      graph_area.height = graph_area.clientHeight
+
+      context = graph_area.getContext("2d")
+      context.strokeStyle = "red"
+      context.lineJoin = "round"
+      context.lineWidth = 2
+
+      points = []
+
+      graph_area.addEventListener('mousedown', onmousedown, {once: true})
+
+      document.getElementById("clear_input").addEventListener("click", clear_input)
+      document.getElementById("copy_to_clipboard").addEventListener("click", copy_to_clipboard)
+    });
+  </script>
+</body>
+
+
