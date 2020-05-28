@@ -9,7 +9,7 @@
 * [High Frequency approaching Geometric Optics](https://mybinder.org/v2/gh/inducer/splash-activities/master?filepath=Wave%20Pool%20with%20Shadows.ipynb)
 * [Comparison with video](https://mybinder.org/v2/gh/inducer/splash-activities/master?filepath=Video%20comparison.ipynb)
 * [Drone Control Interactivity mockup](https://mybinder.org/v2/gh/inducer/splash-activities/master?filepath=Drone%20control.ipynb)
-* [Jupyter comment](https://mybinder.org/v2/gh/inducer/splash-activities/master?filepath=Jupyter%20cannon.ipynb)
+* [Jupyter cannon](https://mybinder.org/v2/gh/inducer/splash-activities/master?filepath=Jupyter%20cannon.ipynb)
 
 This repository also contains an [interactive
 activity](https://relate.cs.illinois.edu/course/gamescamp-waves-s18/flow/camp-activity/start/)
